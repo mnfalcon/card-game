@@ -3,44 +3,31 @@ package com.cards.game.services;
 
 import com.cards.game.models.Card;
 import com.cards.game.repositories.CardRepository;
+import com.cards.game.services.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CardService {
+public class CardService extends BaseService<Card> {
 
     @Autowired
-    private CardRepository cardRepository;
-
-    public Card save(Card card) {
-        return cardRepository.save(card);
+    public CardService(CardRepository cardRepository) {
+        super(cardRepository);
     }
 
-    public Card getById(Long id) {
-        return cardRepository.getById(id);
-    }
-
-    public List<Card> getAll() {
-        return cardRepository.findAll();
-    }
-
-    public Page getByPage(int page, int limit) {
-        PageRequest r = PageRequest.of(page, limit);
-        return cardRepository.findAll(r);
-    }
-
+    @Override
     public Card update(Card card, Long id) {
-        if (cardRepository.existsById(id)) {
+        if (repository.existsById(id)) {
             card.setId(id);
-            return cardRepository.save(card);
-        } else {
-            return null;
+            return repository.save(card);
         }
+        throw new NotFoundException(entityName);
     }
 }

@@ -22,6 +22,6 @@ public class Player {
     private User user;
     private int healthPoints;
     private int manaPoints;
-    @OneToMany
+    @ManyToMany
     private List<Card> deck;
 }

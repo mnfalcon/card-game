@@ -26,6 +26,7 @@ public class CardController {
 
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable("id") Long id) {
+
         return ResponseEntity.ok(cardService.getById(id));
     }
 

@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card implements BaseCard {
+public class Card implements BaseCard, BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +37,5 @@ public class Card implements BaseCard {
         this.healthPoints = card.healthPoints;
         this.manaCost = (card.attackPoints + card.healthPoints) / 2;
     }
+
 }
