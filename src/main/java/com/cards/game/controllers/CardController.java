@@ -4,10 +4,7 @@ import com.cards.game.models.Card;
 import com.cards.game.services.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/card")
@@ -20,5 +17,26 @@ public class CardController {
     public ResponseEntity save(@RequestBody Card card) {
         Card newCard = new Card(card);
         return ResponseEntity.ok(cardService.save(newCard));
+    }
+
+    @GetMapping("/")
+    public ResponseEntity getAll() {
+        return ResponseEntity.ok(cardService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(cardService.getById(id));
+    }
+
+    @GetMapping("/paginated")
+    public ResponseEntity getByPage(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                    @RequestParam(name = "limit", defaultValue = "100") Integer limit) {
+        return ResponseEntity.ok(cardService.getByPage(page, limit));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity update(@RequestBody Card card, @PathVariable("id") Long id) {
+        return ResponseEntity.ok(cardService.update(card, id));
     }
 }

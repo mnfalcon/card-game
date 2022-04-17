@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card {
+public class Card implements BaseCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
