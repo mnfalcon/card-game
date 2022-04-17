@@ -13,13 +13,4 @@ public class UserService extends BaseService<User> {
     public UserService(UserRepository userRepository) {
         super(userRepository);
     }
-
-    @Override
-    public User update(User object, Long id) {
-        if(repository.existsById(id)) {
-            object.setId(id);
-            return repository.save(object);
-        }
-        throw new UserNotFoundException();
-    }
 }

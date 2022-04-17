@@ -21,7 +21,7 @@ public abstract class BaseService<T extends BaseEntity> {
 
     public BaseService(JpaRepository<T, Long> repository) {
         this.repository = repository;
-        this.entityName = GenericTypeResolver.resolveTypeArgument(getClass(), BaseService.class).getName();
+        this.entityName = GenericTypeResolver.resolveTypeArgument(getClass(), BaseService.class).getSimpleName();
     }
 
     public T save(T card) {
@@ -42,12 +42,12 @@ public abstract class BaseService<T extends BaseEntity> {
         return repository.findAll(r);
     }
 
-    public abstract T update(T object, Long id); // TODO find way to abstract this
-
-//    public T update(T object, Long id) {
-//        if (repository.existsById(id)) {
-//
-//        }
-//    }
+    public T update(T object, Long id) {
+        if (repository.existsById(id)) {
+            object.setId(id);
+            repository.save(object);
+        }
+        throw new NotFoundException(entityName);
+    }
 
 }

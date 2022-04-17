@@ -21,13 +21,4 @@ public class CardService extends BaseService<Card> {
     public CardService(CardRepository cardRepository) {
         super(cardRepository);
     }
-
-    @Override
-    public Card update(Card card, Long id) {
-        if (repository.existsById(id)) {
-            card.setId(id);
-            return repository.save(card);
-        }
-        throw new NotFoundException(entityName);
-    }
 }
