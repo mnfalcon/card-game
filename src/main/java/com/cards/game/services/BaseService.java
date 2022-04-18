@@ -1,10 +1,7 @@
 package com.cards.game.services;
 
 import com.cards.game.models.BaseEntity;
-import com.cards.game.models.Card;
-import com.cards.game.repositories.CardRepository;
 import com.cards.game.services.exceptions.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,12 +25,12 @@ public abstract class BaseService<T extends BaseEntity> {
         return repository.save(card);
     }
 
-    public T getById(Long id) {
+    public T findById(Long id) {
         Optional<T> obj = repository.findById(id);
         return obj.orElseThrow(()-> new NotFoundException(entityName));
     }
 
-    public List<T> getAll() {
+    public List<T> findAll() {
         return repository.findAll();
     }
 

@@ -19,18 +19,17 @@ public class CardController {
         return ResponseEntity.ok(cardService.save(newCard));
     }
 
-    @GetMapping("/")
-    public ResponseEntity getAll() {
-        return ResponseEntity.ok(cardService.getAll());
+    @GetMapping("/all")
+    public ResponseEntity findAll() {
+        return ResponseEntity.ok(cardService.findAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable("id") Long id) {
-
-        return ResponseEntity.ok(cardService.getById(id));
+        return ResponseEntity.ok(cardService.findById(id));
     }
 
-    @GetMapping("/paginated")
+    @GetMapping("/")
     public ResponseEntity getByPage(@RequestParam(name = "page", defaultValue = "0") Integer page,
                                     @RequestParam(name = "limit", defaultValue = "100") Integer limit) {
         return ResponseEntity.ok(cardService.getByPage(page, limit));

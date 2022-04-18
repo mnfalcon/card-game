@@ -28,6 +28,7 @@ public class Card implements BaseCard, BaseEntity {
     @Column(nullable = false)
     private int healthPoints;
     private int manaCost;
+    private String imageUrl;
 
     public Card(Card card) {
         this.id = card.id;

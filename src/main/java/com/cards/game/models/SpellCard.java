@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SpellCard implements BaseCard {
+public class SpellCard implements BaseCard, BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,5 +22,6 @@ public class SpellCard implements BaseCard {
     @Column(nullable = false)
     private String description;
     private int manaCost;
+    private String imageUrl;
 
 }
