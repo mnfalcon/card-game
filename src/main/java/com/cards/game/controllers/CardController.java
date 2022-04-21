@@ -2,13 +2,19 @@ package com.cards.game.controllers;
 
 import com.cards.game.models.Card;
 import com.cards.game.models.exceptions.NotFoundResponse;
+import com.cards.game.services.AmazonService;
 import com.cards.game.services.CardService;
 import com.cards.game.services.exceptions.NotFoundException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/card")
@@ -16,11 +22,26 @@ public class CardController {
 
     @Autowired
     private CardService cardService;
+    @Autowired
+    private AmazonService amazonService;
 
-    @PostMapping("/")
-    public ResponseEntity save(@RequestBody Card card) {
+    /** To save a Card from Postman, select the 'form-data' type,
+     * next to the input for the image select "media" and browse for the image.
+     * Then add another field called data and it's vlue will be the whole JSON object */
+    @PostMapping(value = "/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity save(@RequestParam("data") String cardData, @RequestPart MultipartFile file) throws JsonMappingException, JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        Card card = mapper.readValue(cardData, Card.class);
+
         Card newCard = new Card(card);
+        String imgUrl = amazonService.uploadImage(file);
+        newCard.setImageUrl(imgUrl);
         return ResponseEntity.ok(cardService.save(newCard));
+    }
+
+    @PostMapping("/image") // TODO Remove this endpoint
+    public ResponseEntity saveImage(@RequestPart MultipartFile file) {
+        return ResponseEntity.ok(amazonService.uploadImage(file));
     }
 
     @GetMapping("/all")

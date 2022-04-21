@@ -1,5 +1,6 @@
 package com.cards.game;
 
+import com.cards.game.handler.GlobalExceptionHandler;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -7,9 +8,13 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @Aspect
 @Component
 public class DemoLoggingAspect {
+
+    private static Logger log = Logger.getLogger(GlobalExceptionHandler.class.getName());
 
     @Before("execution(public org.springframework.http.ResponseEntity save(com.cards.game.models.Card))")
     public void beforeSave(JoinPoint joinPoint) {
@@ -29,6 +34,6 @@ public class DemoLoggingAspect {
     @AfterReturning( pointcut = "execution(public * com.cards.game.services.*.save(*))",
             returning = "result")
     public void afterSaving(JoinPoint joinPoint, Object result) {
-        System.out.println("Saving finished. Saved: " + result.toString());
+        log.info("Saving finished. Saved: " + result.toString());
     }
 }
