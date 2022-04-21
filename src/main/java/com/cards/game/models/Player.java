@@ -24,4 +24,8 @@ public class Player implements BaseEntity {
     private int manaPoints;
     @ManyToMany
     private List<Card> deck;
+    @ManyToMany
+    private List<Card> hand;
+    private int cardsInHand;
+
 }

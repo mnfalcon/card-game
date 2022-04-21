@@ -39,4 +39,16 @@ public class Card implements BaseCard, BaseEntity {
         this.manaCost = (card.attackPoints + card.healthPoints) / 2;
     }
 
+    @Override
+    public String toString() {
+        return "Card{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", attackPoints=" + attackPoints +
+                ", healthPoints=" + healthPoints +
+                ", manaCost=" + manaCost +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
 }

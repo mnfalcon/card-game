@@ -1,8 +1,12 @@
 package com.cards.game.controllers;
 
 import com.cards.game.models.Card;
+import com.cards.game.models.exceptions.NotFoundResponse;
 import com.cards.game.services.CardService;
+import com.cards.game.services.exceptions.NotFoundException;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +29,7 @@ public class CardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getById(@PathVariable("id") Long id) {
+    public ResponseEntity getById(@PathVariable("id") Long id) throws NotFoundException {
         return ResponseEntity.ok(cardService.findById(id));
     }
 
@@ -39,4 +43,5 @@ public class CardController {
     public ResponseEntity update(@RequestBody Card card, @PathVariable("id") Long id) {
         return ResponseEntity.ok(cardService.update(card, id));
     }
+
 }

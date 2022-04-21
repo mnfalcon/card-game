@@ -27,7 +27,7 @@ public abstract class BaseService<T extends BaseEntity> {
 
     public T findById(Long id) {
         Optional<T> obj = repository.findById(id);
-        return obj.orElseThrow(()-> new NotFoundException(entityName));
+        return obj.orElseThrow(()-> new NotFoundException(entityName, id));
     }
 
     public List<T> findAll() {
@@ -44,7 +44,7 @@ public abstract class BaseService<T extends BaseEntity> {
             object.setId(id);
             repository.save(object);
         }
-        throw new NotFoundException(entityName);
+        throw new NotFoundException(entityName, id);
     }
 
 }
