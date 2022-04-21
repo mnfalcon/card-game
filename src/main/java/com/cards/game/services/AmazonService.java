@@ -67,8 +67,6 @@ public class AmazonService {
 
     public String uploadImage(MultipartFile multipartFile) {
 
-        // https://mnfcardbucket.s3.sa-east-1.amazonaws.com/1650548519025-82711.jpg
-
         String fileUrl = "";
         try {
             File file = convertMultiPartToFile(multipartFile);
@@ -84,7 +82,13 @@ public class AmazonService {
 
     public void deleteFileFromS3Bucket(String fileUrl) {
         String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
-        s3client.deleteObject(new DeleteObjectRequest(bucketName + "/", fileName));
-        log.info("Deleted file '" + fileName + "' at: " + fileUrl);
+        try {
+            s3client.deleteObject(new DeleteObjectRequest(bucketName + "/", fileName));
+            log.info("Deleted file '" + fileName + "' at: " + fileUrl);
+
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

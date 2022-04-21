@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,5 +23,15 @@ public class GameMatch implements BaseEntity {
     @OneToOne
     private Player player2;
     private boolean isPlayer1Turn;
+    @OneToMany
+    private List<Card> graveyard;
+    @OneToMany
+    private List<Card> player1Battlefield;
+    @OneToMany
+    private List<Card> player2Battlefield;
+    @OneToOne
+    private GameChat gameChat;
+    @OneToMany
+    private List<PlayerSummonCardMove> playerMoves;
 
 }
