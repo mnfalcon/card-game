@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,6 +24,8 @@ public class GameMatch implements BaseEntity {
     @OneToOne
     private Player player2;
     private boolean isPlayer1Turn;
+    private LocalDateTime turnStart;
+    private LocalDateTime turnEnd;
     @OneToMany
     private List<Card> graveyard;
     @OneToMany
