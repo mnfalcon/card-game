@@ -1,5 +1,7 @@
 db_pass.txt
 
+application.yml
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
