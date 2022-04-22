@@ -21,8 +21,8 @@ public abstract class BaseService<T extends BaseEntity> {
         this.entityName = GenericTypeResolver.resolveTypeArgument(getClass(), BaseService.class).getSimpleName();
     }
 
-    public T save(T card) {
-        return repository.save(card);
+    public T save(T entity) {
+        return repository.save(entity);
     }
 
     public T findById(Long id) {

@@ -1,17 +1,13 @@
 package com.cards.game.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.NonNullFields;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Card implements BaseCard, BaseEntity {
@@ -29,6 +25,8 @@ public class Card implements BaseCard, BaseEntity {
     private int healthPoints;
     private int manaCost;
     private String imageUrl;
+    @ManyToOne
+    private User author;
 
     public Card(Card card) {
         this.id = card.id;
@@ -49,6 +47,7 @@ public class Card implements BaseCard, BaseEntity {
                 ", healthPoints=" + healthPoints +
                 ", manaCost=" + manaCost +
                 ", imageUrl='" + imageUrl + '\'' +
+                ", author=" + author +
                 '}';
     }
 }
