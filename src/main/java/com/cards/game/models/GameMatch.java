@@ -27,11 +27,11 @@ public class GameMatch implements BaseEntity {
     private LocalDateTime turnStart;
     private LocalDateTime turnEnd;
     @OneToMany
-    private List<Card> graveyard;
+    private List<CardInstance> graveyard;
     @OneToMany
-    private List<Card> player1Battlefield;
+    private List<CardInstance> player1Battlefield;
     @OneToMany
-    private List<Card> player2Battlefield;
+    private List<CardInstance> player2Battlefield;
     @OneToOne
     private GameChat gameChat;
     @OneToMany

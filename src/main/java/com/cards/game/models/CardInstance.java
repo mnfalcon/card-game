@@ -12,15 +12,16 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerSummonCardMove {
+public class CardInstance implements BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Player player;
-    @OneToOne
-    private Card playedCard;
+    private Card card;
+    private int currentHealth;
+    private int currentAttack;
     @ManyToOne
     private GameMatch gameMatch;
+
 }
