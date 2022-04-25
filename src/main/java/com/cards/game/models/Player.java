@@ -1,6 +1,6 @@
 package com.cards.game.models;
 
-import com.cards.game.models.enums.Instigator;
+import com.cards.game.models.enums.PlayerEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,6 +28,6 @@ public class Player implements BaseEntity {
     @ManyToMany
     private List<CardInstance> hand;
     private int cardsInHand;
-    private Instigator instigatorType;
+    private PlayerEnum instigatorType;
 
 }

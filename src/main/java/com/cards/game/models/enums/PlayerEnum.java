@@ -1,6 +1,6 @@
 package com.cards.game.models.enums;
 
-public enum Instigator {
+public enum PlayerEnum {
     PLAYER1,
     PLAYER2
 }

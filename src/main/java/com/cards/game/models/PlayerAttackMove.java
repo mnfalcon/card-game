@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerAttackMove implements BaseEntity {
+public class PlayerAttackMove implements BaseEntity, BasePlayerMove {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
